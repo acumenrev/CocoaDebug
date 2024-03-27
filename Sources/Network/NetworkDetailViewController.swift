@@ -378,7 +378,14 @@ class NetworkDetailViewController: UITableViewController, MFMailComposeViewContr
                 UIPasteboard.general.string = httpModel.cURLDescription()
             }
         }
-        
+
+        // copy response
+        let curlCopyResponse = UIAlertAction(title: "copy Response to clipboard", style: .default) { _ in
+            if let httpModel = self.httpModel {
+                UIPasteboard.general.string = String.init(data: httpModel.responseData, encoding: .utf8)
+            }
+        }
+
         let moreAction: UIAlertAction = UIAlertAction(title: "more", style: .default) { [weak self] action -> Void in
             _ = self?.configureMailComposer(true)
             let items: [Any] = [self?.messageBody ?? ""]
@@ -399,6 +406,7 @@ class NetworkDetailViewController: UITableViewController, MFMailComposeViewContr
         // add actions
         alert.addAction(secondAction)
         alert.addAction(curlAction)
+        alert.addAction(curlCopyResponse)
         alert.addAction(firstAction)
         alert.addAction(moreAction)
         alert.addAction(cancelAction)
