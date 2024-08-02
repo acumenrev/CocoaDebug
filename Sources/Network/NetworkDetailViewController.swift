@@ -370,7 +370,8 @@ class NetworkDetailViewController: UITableViewController, MFMailComposeViewContr
         
         let secondAction: UIAlertAction = UIAlertAction(title: "copy to clipboard", style: .default) { [weak self] action -> Void in
             _ = self?.configureMailComposer(true)
-            UIPasteboard.general.string = self?.messageBody
+            let curlDesc = self?.httpModel?.cURLDescription() ?? ""
+            UIPasteboard.general.string = (self?.messageBody ?? "") + "\n\n\n----- cURL Description------\n\n\(curlDesc)\n\n"
         }
         
         let curlAction = UIAlertAction(title: "copy cURL to clipboard", style: .default) { _ in
