@@ -111,6 +111,7 @@ class NetworkViewController: UIViewController {
         tableView.estimatedRowHeight = 0
         tableView.estimatedSectionHeaderHeight = 0
         tableView.estimatedSectionFooterHeight = 0
+        tableView.rowHeight = UITableView.automaticDimension
         
         searchBar.delegate = self
         searchBar.text = CocoaDebugSettings.shared.networkSearchWord
@@ -212,7 +213,7 @@ extension NetworkViewController: UITableViewDelegate {
         let model = models?[indexPath.row]
         var height: CGFloat = 0.0
         
-        if let cString = model?.url.absoluteString.cString(using: String.Encoding.utf8) {
+        if let cString = model?.getContentHeader().cString(using: String.Encoding.utf8) {
             if let content_ = NSString(cString: cString, encoding: String.Encoding.utf8.rawValue) {
                 
                 if model?.url.absoluteString.contains(serverURL) == true {

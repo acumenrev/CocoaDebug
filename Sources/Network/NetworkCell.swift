@@ -27,7 +27,7 @@ class NetworkCell: UITableViewCell {
             guard let serverURL = CocoaDebugSettings.shared.serverURL else {return}
             
             //domain name
-            requestUrlTextView.text = httpModel?.url.absoluteString
+            requestUrlTextView.text = httpModel?.getContentHeader()
             if requestUrlTextView.text?.contains(serverURL) == true {
                 if #available(iOS 8.2, *) {
                     requestUrlTextView.font = UIFont.systemFont(ofSize: 13, weight: .heavy)
@@ -49,10 +49,8 @@ class NetworkCell: UITableViewCell {
                 methodLabel.text = "[" + method + "]"
             }
             
-            if let headers = httpModel?.requestHeaderFields, let graphQLName = headers["X-APOLLO-OPERATION-NAME"] as? String, !graphQLName.isEmpty {
-                let operationType = headers["X-APOLLO-OPERATION-TYPE"] as? String
-                requestUrlTextView.text = "GraphQL: \(operationType ?? "query") \(graphQLName) endpoint: \(httpModel?.url.absoluteString ?? "")"
-                methodLabel.text = "GraphQL"
+            if let headers = httpModel?.requestHeaderFields, let operationType = headers["X-APOLLO-OPERATION-TYPE"] as? String, !operationType.isEmpty {
+                methodLabel.text = "[GraphQL]"
             }
             
             //Request time

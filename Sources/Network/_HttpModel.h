@@ -38,4 +38,6 @@ typedef NS_ENUM(NSUInteger, RequestSerializer) {
 @property (nonatomic,copy)NSString                              *errorLocalizedDescription;
 @property (nonatomic,copy)NSString                              *size;
 
+- (NSString *) getContentHeader;
+
 @end

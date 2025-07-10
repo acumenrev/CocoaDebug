@@ -19,6 +19,21 @@
     return self;
 }
 
+- (NSString *) getContentHeader {
+    NSString* result = self.url.absoluteString;
+    NSString *graphQLName = [_requestHeaderFields objectForKey:@"X-APOLLO-OPERATION-NAME"];
+
+    if (graphQLName != nil && graphQLName.length > 0) {
+        NSString *operationType = [_requestHeaderFields objectForKey:@"X-APOLLO-OPERATION-TYPE"];
+        if (operationType == nil) {
+            operationType = @"query";
+        }
+
+        result= [NSString stringWithFormat:@"GraphQL: %@ %@ endpoint: %@", operationType, graphQLName, self.url.absoluteString];
+    }
+    return result;
+}
+
 @end
 
 
