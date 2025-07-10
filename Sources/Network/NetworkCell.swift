@@ -46,7 +46,7 @@ class NetworkCell: UITableViewCell {
             
             if let headers = httpModel?.requestHeaderFields, let graphQLName = headers["X-APOLLO-OPERATION-NAME"] as? String, !graphQLName.isEmpty {
                 let operationType = headers["X-APOLLO-OPERATION-TYPE"] as? String
-                requestUrlTextView.text = "GraphQL: \(operationType ?? "query") \(graphQLName)"
+                requestUrlTextView.text += "\n\nGraphQL: \(operationType ?? "query") \(graphQLName)"
             }
             
             //Request method
