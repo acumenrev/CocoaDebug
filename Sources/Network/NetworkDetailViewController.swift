@@ -488,7 +488,7 @@ extension NetworkDetailViewController {
         
         var height: CGFloat = 0.0
         
-        if let cString = httpModel?.url.absoluteString.cString(using: String.Encoding.utf8) {
+        if let cString = httpModel?.getContentHeader().cString(using: String.Encoding.utf8) {
             if let content_ = NSString(cString: cString, encoding: String.Encoding.utf8.rawValue) {
                 
                 if httpModel?.url.absoluteString.contains(serverURL) == true {
