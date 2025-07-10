@@ -29,7 +29,7 @@
             operationType = @"query";
         }
 
-        result= [NSString stringWithFormat:@"GraphQL: %@ %@ endpoint: %@", operationType, graphQLName, self.url.absoluteString];
+        result= [NSString stringWithFormat:@"GraphQL: %@ %@ \n\nendpoint: %@", operationType, graphQLName, self.url.absoluteString];
     }
     return result;
 }
