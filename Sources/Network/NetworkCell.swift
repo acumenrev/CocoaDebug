@@ -44,14 +44,15 @@ class NetworkCell: UITableViewCell {
                 }
             }
             
-            if let headers = httpModel?.requestHeaderFields, let graphQLName = headers["X-APOLLO-OPERATION-NAME"] as? String, !graphQLName.isEmpty {
-                let operationType = headers["X-APOLLO-OPERATION-TYPE"] as? String
-                requestUrlTextView.text += "GraphQL: \(operationType ?? "query") \(graphQLName) endpoint: \(httpModel?.url.absoluteString ?? "")"
-            }
-            
             //Request method
             if let method = httpModel?.method {
                 methodLabel.text = "[" + method + "]"
+            }
+            
+            if let headers = httpModel?.requestHeaderFields, let graphQLName = headers["X-APOLLO-OPERATION-NAME"] as? String, !graphQLName.isEmpty {
+                let operationType = headers["X-APOLLO-OPERATION-TYPE"] as? String
+                requestUrlTextView.text = "GraphQL: \(operationType ?? "query") \(graphQLName) endpoint: \(httpModel?.url.absoluteString ?? "")"
+                methodLabel.text = "GraphQL"
             }
             
             //Request time
